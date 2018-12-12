@@ -4,13 +4,8 @@
 <%@page contentType="text/html; charset=EUC-KR"%>
 
 <%
-	// 1. 사용자 입력정보 추출	
-	// 2. DB 연동 처리
-	BoardVO vo = new BoardVO();	
-	BoardDAO boardDAO = new BoardDAO();
-	List<BoardVO> boardList = boardDAO.getBoardList(vo);
-	
-	// 3. 응답 화면 구성
+	// 세션에 저장된 글 목록
+	List<BoardVO> boardList = (List) session.getAttribute("boardList");
 %> 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -53,7 +48,7 @@
 <% for(BoardVO board : boardList) { %>
 <tr>
 	<td><%= board.getSeq() %></td>
-	<td align="left"><a href="getBoard.jsp?seq=<%= board.getSeq() %>"><%= board.getTitle() %></a></td>
+	<td align="left"><a href="getBoard.do?seq=<%= board.getSeq() %>"><%= board.getTitle() %></a></td>
 	<td><%= board.getWriter() %></td>
 	<td><%= board.getRegDate() %></td>
 	<td><%= board.getCnt() %></td>
